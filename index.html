@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dein GPT-Coach</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>GPT-Coach</h2>
+  <p>Hier ist dein aktueller Coaching-Prompt:</p>
+  <textarea id="promptInput" rows="5"></textarea>
+  <button onclick="copyPrompt()">📋 Prompt kopieren</button>
+  <button onclick="openChat()">💬 Chat starten</button>
+
+  <script>
+    // Prompt aus URL holen
+    const params = new URLSearchParams(window.location.search);
+    const prompt = params.get("prompt");
+    if (prompt) {
+      document.getElementById("promptInput").value = decodeURIComponent(prompt);
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById("promptInput").value;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Prompt wurde kopiert!");
+      });
+    }
+
+    function openChat() {
+      window.open("https://chat.openai.com/", "_blank");
+    }
+  </script>
+</body>
+</html>
